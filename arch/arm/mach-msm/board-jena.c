@@ -2296,8 +2296,7 @@ out:
 
 #define GPIO_SDC1_HW_DET 94
 
-#if defined(CONFIG_MMC_MSM_SDC1_SUPPORT) \
-	&& defined(CONFIG_MMC_MSM_CARD_HW_DETECTION)
+#if defined(CONFIG_MMC_MSM_SDC1_SUPPORT)
 static unsigned int msm7x2xa_sdcc_slot_status(struct device *dev)
 {
 	int status;
@@ -2335,11 +2334,9 @@ static struct mmc_platform_data sdc1_plat_data = {
 	.msmsdcc_fmin	= 144000,
 	.msmsdcc_fmid	= 24576000,
 	.msmsdcc_fmax	= 49152000,
-#ifdef CONFIG_MMC_MSM_CARD_HW_DETECTION
 	.status      = msm7x2xa_sdcc_slot_status,
 	.status_irq  = MSM_GPIO_TO_INT(GPIO_SDC1_HW_DET),
 	.irq_flags   = IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING,
-#endif
 };
 #endif
 
@@ -2357,9 +2354,7 @@ static struct mmc_platform_data sdc2_plat_data = {
 	.status = wlan_status,
 	.register_status_notify = register_wlan_status_notify,
 #endif /* ATH_POLLING */
-#ifdef CONFIG_MMC_MSM_SDIO_SUPPORT
 	.sdiowakeup_irq = MSM_GPIO_TO_INT(66),
-#endif /* CONFIG_MMC_MSM_SDIO_SUPPORT */
 	.msmsdcc_fmin	= 144000,
 	.msmsdcc_fmid	= 24576000,
 	.msmsdcc_fmax	= 49152000, //24576000, ///*144000,//*/
